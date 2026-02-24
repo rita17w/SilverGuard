@@ -4,12 +4,13 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>SafeGuard – Dashboard</title>
-  <link rel="stylesheet" href="assets/css/styles.css"/>
-  <script defer src="assets/js/app.js"></script>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
   <div class="app">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="brand">
         <div class="logo">🛡️</div>
@@ -40,55 +41,56 @@
       </div>
     </aside>
 
+    <!-- MAIN -->
     <main class="main">
       <div class="topbar">
-        <div>
-          <div class="h1">Dashboard</div>
-          <div class="small">Your safety workspace is ready.</div>
-        </div>
+        <div class="h1">Dashboard</div>
 
         <div class="top-actions">
-          <button class="iconbtn" title="Notifications">🔔</button>
+          <button class="iconbtn badge" title="Notifications">🔔</button>
           <button class="iconbtn" title="Settings" onclick="location.href='settings.html'">⚙️</button>
+
           <div class="userchip">
             <div class="avatar">M</div>
             <div>
-              <div style="font-weight:800;line-height:1">Margaret Smith</div>
+              <div style="font-weight:900;line-height:1">Margaret Smith</div>
               <div class="small">Senior User</div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- HERO BANNER -->
       <section class="hero">
-        <div class="hero-left">
+        <div>
           <div class="hero-title">Welcome back, Margaret!</div>
           <p class="hero-sub">
-            Review captured screenshots, check suspicious messages, and stay protected from scams.
+            Your safety workspace is ready. Review captured screenshots and stay protected from scams.
           </p>
 
           <div class="hero-buttons">
             <button class="btn light" onclick="location.href='scan.html'">Upload Screenshot</button>
-            <button class="btn secondary" onclick="location.href='tools.html'">Extension Demo</button>
+            <button class="btn dark" onclick="location.href='tools.html'">Extension Demo</button>
           </div>
         </div>
 
         <div class="hero-metrics">
           <div class="metric">
-            <div class="num" id="mScans">12</div>
+            <div class="num">12</div>
             <div class="lab">Scans Today</div>
           </div>
           <div class="metric">
-            <div class="num" id="mBlocked">3</div>
+            <div class="num">3</div>
             <div class="lab">Blocked</div>
           </div>
           <div class="metric">
-            <div class="num" id="mScore">98%</div>
+            <div class="num">98%</div>
             <div class="lab">Safety Score</div>
           </div>
         </div>
       </section>
 
+      <!-- KPI CARDS -->
       <div class="grid cards4" style="margin-top:14px;">
         <div class="card">
           <div class="kpi">
@@ -96,7 +98,7 @@
               <div class="title">Pending Review</div>
               <div class="sub">Screenshots waiting</div>
             </div>
-            <div class="value" id="kPending">2</div>
+            <div class="value">2</div>
           </div>
         </div>
 
@@ -106,7 +108,7 @@
               <div class="title">High Risk</div>
               <div class="sub">Needs attention</div>
             </div>
-            <div class="value" id="kHigh">1</div>
+            <div class="value">1</div>
           </div>
         </div>
 
@@ -116,7 +118,7 @@
               <div class="title">Safe Items</div>
               <div class="sub">This week</div>
             </div>
-            <div class="value" id="kSafe">9</div>
+            <div class="value">9</div>
           </div>
         </div>
 
@@ -131,67 +133,44 @@
         </div>
       </div>
 
+      <!-- INBOX -->
       <div class="card" style="margin-top:14px;">
         <div class="inbox-header">
           <div>
             <div class="h2">Screenshot Inbox</div>
-            <div class="small">Recent items (demo). Real version would show uploaded screenshots.</div>
+            <div class="small">Review captured screenshots and view safety analysis</div>
           </div>
           <a class="link" href="scan.html">View All →</a>
         </div>
 
-        <div class="list" id="inboxList"></div>
-      </div>
-
-      <script>
-        // Build inbox from scanHistory (if exists), else show demo
-        const inboxList = document.getElementById("inboxList");
-        const hist = getScanHistory();
-        const demo = [
-          { title: "“Your account is suspended…”", desc:"asks for verification code", level:"high" },
-          { title: "USPS delivery fee link", desc:"short link detected", level:"medium" },
-          { title: "Bank login notification", desc:"trusted domain", level:"low" },
-        ];
-
-        const items = hist.length ? hist.slice(0,3).map(h=>({
-          title: h.preview,
-          desc: `Scanned • ${fmtTime(h.ts)}`,
-          level: h.level
-        })) : demo;
-
-        function levelTag(level){
-          if(level==="high") return {cls:"bad", text:"High Risk"};
-          if(level==="medium") return {cls:"warn", text:"Suspicious"};
-          return {cls:"good", text:"Safe"};
-        }
-
-        inboxList.innerHTML = items.map(i=>{
-          const t = levelTag(i.level);
-          return `
-            <div class="item">
-              <div>
-                <strong>${i.title}</strong>
-                <div class="small">${i.desc}</div>
-              </div>
-              <span class="tag ${t.cls}">${t.text}</span>
+        <div class="list">
+          <div class="item">
+            <div>
+              <div style="font-weight:900">“Your account is suspended…”</div>
+              <div class="small">Captured 5 min ago • asks for verification code</div>
             </div>
-          `;
-        }).join("");
+            <span class="tag bad">High Risk</span>
+          </div>
 
-        // Light demo KPIs: if history exists, update counts
-        if(hist.length){
-          const high = hist.filter(h=>h.level==="high").length;
-          const med = hist.filter(h=>h.level==="medium").length;
-          const low = hist.filter(h=>h.level==="low").length;
-          document.getElementById("kHigh").textContent = String(high);
-          document.getElementById("kSafe").textContent = String(low);
-          document.getElementById("mScans").textContent = String(Math.min(99, hist.length));
-          document.getElementById("mBlocked").textContent = String(high);
-          const score = Math.max(60, Math.min(99, 100 - high*12 - med*5));
-          document.getElementById("mScore").textContent = `${score}%`;
-        }
-      </script>
+          <div class="item">
+            <div>
+              <div style="font-weight:900">USPS delivery fee link</div>
+              <div class="small">Captured 40 min ago • short link detected</div>
+            </div>
+            <span class="tag warn">Suspicious</span>
+          </div>
+
+          <div class="item">
+            <div>
+              <div style="font-weight:900">Bank login notification</div>
+              <div class="small">Captured yesterday • from trusted domain</div>
+            </div>
+            <span class="tag good">Safe</span>
+          </div>
+        </div>
+      </div>
     </main>
+
   </div>
 </body>
 </html>
