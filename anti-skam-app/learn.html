@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SafeGuard – Learn</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="brand-title">SafeGuard</div>
+          <div class="brand-sub">Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a data-nav href="index.html">🏠 Dashboard</a>
+        <a data-nav href="scan.html">🧾 Scan History</a>
+        <a data-nav href="tools.html">🧩 Extension Demo</a>
+
+        <div class="nav-section">Safety Tools</div>
+        <a data-nav href="tools.html">🔗 Link & QR Check</a>
+        <a data-nav href="tools.html#number">📞 Number Lookup</a>
+        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
+        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+
+        <div class="nav-section">Family & Support</div>
+        <a data-nav href="family.html">👥 Trusted Contacts</a>
+        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
+        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+
+        <div class="nav-section">Learn & Practice</div>
+        <a data-nav href="learn.html">📚 Education Hub</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="h1">Education Hub</div>
+          <div class="small">Short lessons + practice drills (senior-friendly).</div>
+        </div>
+        <div class="top-actions">
+          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
+          <button class="iconbtn" onclick="location.href='settings.html'" title="Settings">⚙️</button>
+          <div class="userchip">
+            <div class="avatar">M</div>
+            <div>
+              <div style="font-weight:800;line-height:1">Margaret Smith</div>
+              <div class="small">Senior User</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cards2">
+        <div class="card">
+          <div class="h2">1-Minute Lessons</div>
+          <select id="topic" class="input">
+            <option value="bank">Fake bank / account suspended</option>
+            <option value="package">Fake delivery / USPS</option>
+            <option value="family">Impersonating family member</option>
+            <option value="remote">Remote support scam</option>
+            <option value="invest">Investment scam</option>
+          </select>
+
+          <div class="btnrow">
+            <button class="btn gray" id="tts">🔊 Read aloud</button>
+            <button class="btn secondary" onclick="location.href='scan.html'">Try scanning</button>
+          </div>
+
+          <div class="hr"></div>
+          <div style="font-weight:900;font-size:18px" id="title"></div>
+          <div class="note" id="content" style="margin-top:8px;"></div>
+          <ul class="note" id="signals" style="margin-top:10px;padding-left:18px;"></ul>
+          <ul class="note" id="steps" style="margin-top:10px;padding-left:18px;"></ul>
+        </div>
+
+        <div class="card">
+          <div class="h2">Scam Simulation Drills (P2)</div>
+          <div class="small">Answer one question to practice safer behavior.</div>
+          <div class="hr"></div>
+
+          <div class="note" id="drillQ" style="font-weight:900"></div>
+          <div class="btnrow" id="drillBtns"></div>
+          <div class="note" id="drillAns" style="margin-top:10px;"></div>
+
+          <div class="hr"></div>
+          <div class="h2">Quick rules</div>
+          <ul class="note" style="padding-left:18px;">
+            <li>Never share verification codes.</li>
+            <li>Never transfer money under pressure.</li>
+            <li>Verify using official contact info you find yourself.</li>
+            <li>If unsure, ask a trusted contact.</li>
+          </ul>
+        </div>
+      </div>
+
+      <script>
+        const lessons = {
+          bank: {
+            title:"Fake bank alert",
+            content:"Scammers claim your account is frozen and push you to click a link or give a code.",
+            signals:["Urgency + fear (frozen/suspended)","Asks for codes/password","Unknown link/domain"],
+            steps:["Stop immediately","Call bank via official number","Ask family before any action"]
+          },
+          package: {
+            title:"Fake delivery message",
+            content:"Scammers send a link to 'reschedule delivery' or pay a small fee.",
+            signals:["Unknown short link","Requests payment/card","Odd domain/spelling"],
+            steps:["Don’t click the link","Check official USPS/UPS site","Ask family if unsure"]
+          },
+          family: {
+            title:"Impersonating family",
+            content:"Scammer pretends to be your child and asks for money quickly.",
+            signals:["New number","Urgent money request","Avoids video/voice"],
+            steps:["Call known number","Do not send money","Ask a second family member"]
+          },
+          remote: {
+            title:"Remote support scam",
+            content:"They ask you to install AnyDesk/TeamViewer to 'fix' a problem.",
+            signals:["Remote app request","Threatens consequences","Requests payment"],
+            steps:["Do not install anything","Hang up","Contact official support yourself"]
+          },
+          invest: {
+            title:"Investment scam",
+            content:"High returns, low risk, and pressure to deposit quickly.",
+            signals:["Guaranteed returns","Pressure to act now","Asks to move money to new accounts"],
+            steps:["Assume scam until proven otherwise","Verify via regulated sources","Ask family + do not transfer"]
+          }
+        };
+
+        const topic = document.getElementById("topic");
+        const title = document.getElementById("title");
+        const content = document.getElementById("content");
+        const signals = document.getElementById("signals");
+        const steps = document.getElementById("steps");
+        const tts = document.getElementById("tts");
+
+        function renderLesson(){
+          const L = lessons[topic.value];
+          title.textContent = L.title;
+          content.textContent = L.content;
+          signals.innerHTML = L.signals.map(x=>`<li><strong>Red flag:</strong> ${x}</li>`).join("");
+          steps.innerHTML = L.steps.map(x=>`<li><strong>Do:</strong> ${x}</li>`).join("");
+        }
+        renderLesson();
+        topic.addEventListener("change", renderLesson);
+
+        tts.addEventListener("click", ()=>{
+          const L = lessons[topic.value];
+          const text = `${L.title}. ${L.content}. Red flags: ${L.signals.join(", ")}. What to do: ${L.steps.join(", ")}.`;
+          speak(text);
+        });
+
+        // Drills
+        const drills = [
+          {
+            q:"A message says: “Your account is suspended. Click now.” What should you do?",
+            choices:["Click immediately", "Pause and verify via official channels", "Share verification code to unlock"],
+            correct:1,
+            explain:"Pause first. Use official contact info you find yourself. Never share codes."
+          },
+          {
+            q:"Someone asks you to buy gift cards to pay a fee. Best response?",
+            choices:["Buy the gift cards", "Ask family first and do not pay", "Send bank password to confirm"],
+            correct:1,
+            explain:"Gift cards are a common scam method. Do not pay; confirm with family."
+          }
+        ];
+        let cur = 0;
+        const drillQ = document.getElementById("drillQ");
+        const drillBtns = document.getElementById("drillBtns");
+        const drillAns = document.getElementById("drillAns");
+
+        function renderDrill(){
+          const d = drills[cur];
+          drillQ.textContent = d.q;
+          drillBtns.innerHTML = d.choices.map((c,i)=>`<button class="btn gray" data-i="${i}">${c}</button>`).join("");
+          drillAns.textContent = "";
+          drillBtns.querySelectorAll("button").forEach(b=>{
+            b.addEventListener("click", ()=>{
+              const i = Number(b.dataset.i);
+              const ok = i === d.correct;
+              drillAns.textContent = ok ? `✅ Correct. ${d.explain}` : `❌ Not safe. ${d.explain}`;
+              cur = (cur + 1) % drills.length;
+            });
+          });
+        }
+        renderDrill();
+      </script>
+    </main>
+  </div>
+</body>
+</html>

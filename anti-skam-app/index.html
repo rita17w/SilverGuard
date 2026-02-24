@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SafeGuard – Dashboard</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="brand-title">SafeGuard</div>
+          <div class="brand-sub">Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a data-nav href="index.html">🏠 Dashboard</a>
+        <a data-nav href="scan.html">🧾 Scan History</a>
+        <a data-nav href="tools.html">🧩 Extension Demo</a>
+
+        <div class="nav-section">Safety Tools</div>
+        <a data-nav href="tools.html">🔗 Link & QR Check</a>
+        <a data-nav href="tools.html#number">📞 Number Lookup</a>
+        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
+        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+
+        <div class="nav-section">Family & Support</div>
+        <a data-nav href="family.html">👥 Trusted Contacts</a>
+        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
+        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+
+        <div class="nav-section">Learn & Practice</div>
+        <a data-nav href="learn.html">📚 Education Hub</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="h1">Dashboard</div>
+          <div class="small">Your safety workspace is ready.</div>
+        </div>
+
+        <div class="top-actions">
+          <button class="iconbtn" title="Notifications">🔔</button>
+          <button class="iconbtn" title="Settings" onclick="location.href='settings.html'">⚙️</button>
+          <div class="userchip">
+            <div class="avatar">M</div>
+            <div>
+              <div style="font-weight:800;line-height:1">Margaret Smith</div>
+              <div class="small">Senior User</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-title">Welcome back, Margaret!</div>
+          <p class="hero-sub">
+            Review captured screenshots, check suspicious messages, and stay protected from scams.
+          </p>
+
+          <div class="hero-buttons">
+            <button class="btn light" onclick="location.href='scan.html'">Upload Screenshot</button>
+            <button class="btn secondary" onclick="location.href='tools.html'">Extension Demo</button>
+          </div>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <div class="num" id="mScans">12</div>
+            <div class="lab">Scans Today</div>
+          </div>
+          <div class="metric">
+            <div class="num" id="mBlocked">3</div>
+            <div class="lab">Blocked</div>
+          </div>
+          <div class="metric">
+            <div class="num" id="mScore">98%</div>
+            <div class="lab">Safety Score</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid cards4" style="margin-top:14px;">
+        <div class="card">
+          <div class="kpi">
+            <div>
+              <div class="title">Pending Review</div>
+              <div class="sub">Screenshots waiting</div>
+            </div>
+            <div class="value" id="kPending">2</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kpi bad">
+            <div>
+              <div class="title">High Risk</div>
+              <div class="sub">Needs attention</div>
+            </div>
+            <div class="value" id="kHigh">1</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kpi good">
+            <div>
+              <div class="title">Safe Items</div>
+              <div class="sub">This week</div>
+            </div>
+            <div class="value" id="kSafe">9</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kpi blue">
+            <div>
+              <div class="title">Protection</div>
+              <div class="sub">All systems ready</div>
+            </div>
+            <div class="value">Active</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <div class="inbox-header">
+          <div>
+            <div class="h2">Screenshot Inbox</div>
+            <div class="small">Recent items (demo). Real version would show uploaded screenshots.</div>
+          </div>
+          <a class="link" href="scan.html">View All →</a>
+        </div>
+
+        <div class="list" id="inboxList"></div>
+      </div>
+
+      <script>
+        // Build inbox from scanHistory (if exists), else show demo
+        const inboxList = document.getElementById("inboxList");
+        const hist = getScanHistory();
+        const demo = [
+          { title: "“Your account is suspended…”", desc:"asks for verification code", level:"high" },
+          { title: "USPS delivery fee link", desc:"short link detected", level:"medium" },
+          { title: "Bank login notification", desc:"trusted domain", level:"low" },
+        ];
+
+        const items = hist.length ? hist.slice(0,3).map(h=>({
+          title: h.preview,
+          desc: `Scanned • ${fmtTime(h.ts)}`,
+          level: h.level
+        })) : demo;
+
+        function levelTag(level){
+          if(level==="high") return {cls:"bad", text:"High Risk"};
+          if(level==="medium") return {cls:"warn", text:"Suspicious"};
+          return {cls:"good", text:"Safe"};
+        }
+
+        inboxList.innerHTML = items.map(i=>{
+          const t = levelTag(i.level);
+          return `
+            <div class="item">
+              <div>
+                <strong>${i.title}</strong>
+                <div class="small">${i.desc}</div>
+              </div>
+              <span class="tag ${t.cls}">${t.text}</span>
+            </div>
+          `;
+        }).join("");
+
+        // Light demo KPIs: if history exists, update counts
+        if(hist.length){
+          const high = hist.filter(h=>h.level==="high").length;
+          const med = hist.filter(h=>h.level==="medium").length;
+          const low = hist.filter(h=>h.level==="low").length;
+          document.getElementById("kHigh").textContent = String(high);
+          document.getElementById("kSafe").textContent = String(low);
+          document.getElementById("mScans").textContent = String(Math.min(99, hist.length));
+          document.getElementById("mBlocked").textContent = String(high);
+          const score = Math.max(60, Math.min(99, 100 - high*12 - med*5));
+          document.getElementById("mScore").textContent = `${score}%`;
+        }
+      </script>
+    </main>
+  </div>
+</body>
+</html>

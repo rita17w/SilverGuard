@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SafeGuard – Settings</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="brand-title">SafeGuard</div>
+          <div class="brand-sub">Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a data-nav href="index.html">🏠 Dashboard</a>
+        <a data-nav href="scan.html">🧾 Scan History</a>
+        <a data-nav href="tools.html">🧩 Extension Demo</a>
+
+        <div class="nav-section">Safety Tools</div>
+        <a data-nav href="tools.html">🔗 Link & QR Check</a>
+        <a data-nav href="tools.html#number">📞 Number Lookup</a>
+        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
+        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+
+        <div class="nav-section">Family & Support</div>
+        <a data-nav href="family.html">👥 Trusted Contacts</a>
+        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
+        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+
+        <div class="nav-section">Learn & Practice</div>
+        <a data-nav href="learn.html">📚 Education Hub</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="h1">Settings</div>
+          <div class="small">Accessibility, whitelist, recovery options.</div>
+        </div>
+        <div class="top-actions">
+          <button class="iconbtn" onclick="location.href='index.html'" title="Dashboard">🏠</button>
+          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
+          <div class="userchip">
+            <div class="avatar">M</div>
+            <div>
+              <div style="font-weight:800;line-height:1">Margaret Smith</div>
+              <div class="small">Senior User</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cards2">
+        <div class="card">
+          <div class="h2">Accessibility</div>
+          <div class="toggle">
+            <div>
+              <div style="font-weight:900">Large Text</div>
+              <div class="small">Recommended for older adults.</div>
+            </div>
+            <button class="btn gray" id="toggleText">Toggle</button>
+          </div>
+
+          <div class="hr"></div>
+          <div class="h2">Trusted Contact (quick edit)</div>
+          <input id="cName" class="input" placeholder="Name"/>
+          <div style="height:10px"></div>
+          <input id="cPhone" class="input" placeholder="Phone"/>
+          <div class="btnrow">
+            <button class="btn primary" id="saveContact">Save</button>
+            <button class="btn gray" onclick="location.href='family.html'">Open Family Page</button>
+          </div>
+          <div class="footer" id="cLine"></div>
+        </div>
+
+        <div class="card">
+          <div class="h2">Smart Whitelist</div>
+          <div class="small">Whitelist reduces risk for trusted domains/keywords.</div>
+          <div class="hr"></div>
+          <input id="wl" class="input" placeholder="bank, usps, amazon"/>
+          <div class="btnrow">
+            <button class="btn primary" id="saveWL">Save</button>
+            <button class="btn gray" id="resetWL">Reset</button>
+          </div>
+          <div class="footer" id="wlLine"></div>
+
+          <div class="hr"></div>
+          <div class="h2">Safety Recovery</div>
+          <div class="note">
+            This prototype stores data locally. If something looks wrong, you can clear scan history.
+          </div>
+          <div class="btnrow">
+            <button class="btn danger" id="clearHistory">Clear Scan History</button>
+            <button class="btn gray" id="resetAll">Reset All Settings</button>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const toggleText = document.getElementById("toggleText");
+        const cName = document.getElementById("cName");
+        const cPhone = document.getElementById("cPhone");
+        const saveContact = document.getElementById("saveContact");
+        const cLine = document.getElementById("cLine");
+
+        const wl = document.getElementById("wl");
+        const saveWL = document.getElementById("saveWL");
+        const resetWL = document.getElementById("resetWL");
+        const wlLine = document.getElementById("wlLine");
+
+        const clearHistory = document.getElementById("clearHistory");
+        const resetAll = document.getElementById("resetAll");
+
+        function load(){
+          const s = store.get("settings", DEFAULTS);
+          const c = s.emergencyContacts?.[0] || {name:"", phone:""};
+          cName.value = c.name || "";
+          cPhone.value = c.phone || "";
+          wl.value = (s.whitelist || []).join(", ");
+          cLine.textContent = c.phone ? `Saved: ${c.name} (${c.phone})` : "No contact saved.";
+          wlLine.textContent = `Whitelist: ${(s.whitelist||[]).join(", ")}`;
+          applySettings();
+        }
+        load();
+
+        toggleText.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          s.largeText = !s.largeText;
+          store.set("settings", s);
+          load();
+          alert(`Large Text: ${s.largeText ? "ON" : "OFF"}`);
+        });
+
+        saveContact.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          s.emergencyContacts = [{name: cName.value.trim() || "Family", phone: cPhone.value.trim()}];
+          store.set("settings", s);
+          load();
+          alert("Saved!");
+        });
+
+        saveWL.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          s.whitelist = wl.value.split(",").map(x=>x.trim()).filter(Boolean);
+          store.set("settings", s);
+          load();
+          alert("Saved!");
+        });
+
+        resetWL.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          s.whitelist = DEFAULTS.whitelist.slice();
+          store.set("settings", s);
+          load();
+          alert("Whitelist reset!");
+        });
+
+        clearHistory.addEventListener("click", ()=>{
+          store.set("scanHistory", []);
+          alert("Scan history cleared.");
+        });
+
+        resetAll.addEventListener("click", ()=>{
+          store.set("settings", DEFAULTS);
+          store.set("scanHistory", []);
+          load();
+          alert("All settings reset.");
+        });
+      </script>
+    </main>
+  </div>
+</body>
+</html>

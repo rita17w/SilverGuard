@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SafeGuard – Scan</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="brand-title">SafeGuard</div>
+          <div class="brand-sub">Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a data-nav href="index.html">🏠 Dashboard</a>
+        <a data-nav href="scan.html">🧾 Scan History</a>
+        <a data-nav href="tools.html">🧩 Extension Demo</a>
+
+        <div class="nav-section">Safety Tools</div>
+        <a data-nav href="tools.html">🔗 Link & QR Check</a>
+        <a data-nav href="tools.html#number">📞 Number Lookup</a>
+        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
+        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+
+        <div class="nav-section">Family & Support</div>
+        <a data-nav href="family.html">👥 Trusted Contacts</a>
+        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
+        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+
+        <div class="nav-section">Learn & Practice</div>
+        <a data-nav href="learn.html">📚 Education Hub</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="h1">Scan</div>
+          <div class="small">Upload screenshot (demo) or paste content to analyze risk.</div>
+        </div>
+
+        <div class="top-actions">
+          <button class="iconbtn" title="Back" onclick="location.href='index.html'">⬅️</button>
+          <button class="iconbtn" title="Settings" onclick="location.href='settings.html'">⚙️</button>
+          <div class="userchip">
+            <div class="avatar">M</div>
+            <div>
+              <div style="font-weight:800;line-height:1">Margaret Smith</div>
+              <div class="small">Senior User</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-title">Scan & Review</div>
+          <p class="hero-sub">Prototype: we simulate screenshot detection by analyzing pasted text. You can show this flow in class.</p>
+
+          <div class="hero-buttons">
+            <label class="btn light" style="display:inline-flex;align-items:center;gap:10px;">
+              📤 Upload Screenshot
+              <input id="file" type="file" accept="image/*" style="display:none">
+            </label>
+            <button class="btn secondary" onclick="location.href='family.html#escort'">Family Escort</button>
+          </div>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <div class="num" id="todayCount">0</div>
+            <div class="lab">Scans Today</div>
+          </div>
+          <div class="metric">
+            <div class="num" id="highCount">0</div>
+            <div class="lab">High Risk</div>
+          </div>
+          <div class="metric">
+            <div class="num" id="safetyScore">--</div>
+            <div class="lab">Safety Score</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid cards2" style="margin-top:14px;">
+        <div class="card">
+          <div class="h2">Paste message content</div>
+          <textarea id="msg" placeholder="Paste SMS/WeChat/email here…"></textarea>
+
+          <div class="btnrow">
+            <button class="btn primary" id="analyze">Analyze</button>
+            <button class="btn gray" id="tts">🔊 Read</button>
+            <button class="btn gray" id="clear">Clear</button>
+            <button class="btn danger" id="askFamily">One-Tap Family Ask</button>
+          </div>
+
+          <div id="risk" class="riskbox good" style="display:none;">
+            <div>
+              <div style="font-weight:900" id="riskTitle">Low Risk</div>
+              <div class="small" id="riskZh"></div>
+              <div class="small" id="flags"></div>
+            </div>
+            <div style="text-align:right">
+              <div class="meter"><div id="bar" style="width:0%"></div></div>
+              <div class="small"><span id="score">0</span>/100</div>
+            </div>
+          </div>
+
+          <div id="next" class="card" style="margin-top:12px;display:none;">
+            <div class="h2">What to do next</div>
+            <ul class="note" id="actions" style="margin:0; padding-left:18px;"></ul>
+            <div class="btnrow">
+              <button class="btn secondary" onclick="location.href='tools.html'">Check link/number</button>
+              <button class="btn secondary" onclick="location.href='learn.html'">Learn patterns</button>
+            </div>
+          </div>
+
+          <div class="footer">
+            Tip: In demo, uploading a screenshot just stores its filename in history (no OCR).
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="inbox-header">
+            <div>
+              <div class="h2">Scan History</div>
+              <div class="small">Last 10 scans (local only).</div>
+            </div>
+            <a class="link" href="index.html">Dashboard →</a>
+          </div>
+          <div class="list" id="history"></div>
+        </div>
+      </div>
+
+      <script>
+        const msg = document.getElementById("msg");
+        const analyzeBtn = document.getElementById("analyze");
+        const clearBtn = document.getElementById("clear");
+        const ttsBtn = document.getElementById("tts");
+        const askBtn = document.getElementById("askFamily");
+
+        const riskBox = document.getElementById("risk");
+        const riskTitle = document.getElementById("riskTitle");
+        const riskZh = document.getElementById("riskZh");
+        const flags = document.getElementById("flags");
+        const bar = document.getElementById("bar");
+        const scoreEl = document.getElementById("score");
+
+        const next = document.getElementById("next");
+        const actionsUl = document.getElementById("actions");
+        const historyEl = document.getElementById("history");
+
+        const file = document.getElementById("file");
+
+        function renderHistory(){
+          const hist = getScanHistory().slice(0,10);
+          function tag(level){
+            if(level==="high") return {cls:"bad", text:"High Risk"};
+            if(level==="medium") return {cls:"warn", text:"Suspicious"};
+            return {cls:"good", text:"Safe"};
+          }
+          historyEl.innerHTML = hist.length ? hist.map(h=>{
+            const t = tag(h.level);
+            return `
+              <div class="item">
+                <div>
+                  <strong>${h.preview}</strong>
+                  <div class="small">${fmtTime(h.ts)}</div>
+                </div>
+                <span class="tag ${t.cls}">${t.text}</span>
+              </div>
+            `;
+          }).join("") : `<div class="small">No scans yet. Paste a message and click Analyze.</div>`;
+
+          // metrics
+          const today = new Date().toDateString();
+          const todayCount = hist.filter(h => new Date(h.ts).toDateString() === today).length;
+          const highCount = hist.filter(h => h.level==="high").length;
+          document.getElementById("todayCount").textContent = String(todayCount);
+          document.getElementById("highCount").textContent = String(highCount);
+          const score = Math.max(60, Math.min(99, 100 - highCount*12));
+          document.getElementById("safetyScore").textContent = `${score}%`;
+        }
+        renderHistory();
+
+        analyzeBtn.addEventListener("click", ()=>{
+          const {score, level, hits} = scoreText(msg.value);
+          const meta = riskMeta(level);
+
+          riskBox.style.display = "flex";
+          riskBox.className = `riskbox ${meta.cls}`;
+          riskTitle.textContent = meta.en;
+          riskZh.textContent = meta.zh;
+          flags.textContent = hits.length ? `Flags: ${hits.slice(0,6).join(", ")}` : "No major red flags found.";
+          bar.style.width = `${score}%`;
+          scoreEl.textContent = score;
+
+          const actions = recommendedActions(level);
+          actionsUl.innerHTML = actions.map(x=>`<li>${x}</li>`).join("");
+          next.style.display = "block";
+
+          // Save history entry
+          const preview = (msg.value || "").trim().slice(0, 40) || "(Empty message)";
+          addScanHistory({
+            ts: Date.now(),
+            level,
+            score,
+            preview: preview.length === 40 ? preview + "…" : preview
+          });
+          renderHistory();
+
+          // Optional: If escort mode ON and high risk, nudge user
+          const s = store.get("settings", DEFAULTS);
+          if(s.escortMode && level==="high"){
+            alert("Escort Mode: High risk detected. Please use One-Tap Family Ask before taking any action.");
+          }
+        });
+
+        clearBtn.addEventListener("click", ()=>{
+          msg.value = "";
+          riskBox.style.display = "none";
+          next.style.display = "none";
+        });
+
+        ttsBtn.addEventListener("click", ()=> speak(msg.value));
+
+        askBtn.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          const c = s.emergencyContacts?.[0];
+          if(!c?.phone){
+            alert("No trusted contact set. Please add a contact in Settings.");
+            location.href = "settings.html";
+            return;
+          }
+          const {to, text} = buildFamilyMessage(msg.value);
+          openSMS(to, text);
+        });
+
+        file.addEventListener("change", ()=>{
+          if(!file.files?.[0]) return;
+          const name = file.files[0].name;
+          addScanHistory({
+            ts: Date.now(),
+            level: "medium",
+            score: 40,
+            preview: `Screenshot: ${name}`
+          });
+          renderHistory();
+          alert("Screenshot saved to history (demo). Paste text to analyze risk.");
+        });
+      </script>
+    </main>
+  </div>
+</body>
+</html>

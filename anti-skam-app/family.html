@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SafeGuard – Family</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="brand-title">SafeGuard</div>
+          <div class="brand-sub">Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a data-nav href="index.html">🏠 Dashboard</a>
+        <a data-nav href="scan.html">🧾 Scan History</a>
+        <a data-nav href="tools.html">🧩 Extension Demo</a>
+
+        <div class="nav-section">Safety Tools</div>
+        <a data-nav href="tools.html">🔗 Link & QR Check</a>
+        <a data-nav href="tools.html#number">📞 Number Lookup</a>
+        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
+        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+
+        <div class="nav-section">Family & Support</div>
+        <a data-nav href="family.html">👥 Trusted Contacts</a>
+        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
+        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+
+        <div class="nav-section">Learn & Practice</div>
+        <a data-nav href="learn.html">📚 Education Hub</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="h1">Family & Support</div>
+          <div class="small">Trusted contacts, escort mode, emergency support.</div>
+        </div>
+        <div class="top-actions">
+          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
+          <button class="iconbtn" onclick="location.href='settings.html'" title="Settings">⚙️</button>
+          <div class="userchip">
+            <div class="avatar">M</div>
+            <div>
+              <div style="font-weight:800;line-height:1">Margaret Smith</div>
+              <div class="small">Senior User</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cards2">
+        <div class="card">
+          <div class="h2">Trusted Contacts</div>
+          <div class="small">Add one family contact for One-Tap Ask.</div>
+          <div class="hr"></div>
+
+          <input id="name" class="input" placeholder="Name (e.g., Daughter)"/>
+          <div style="height:10px"></div>
+          <input id="phone" class="input" placeholder="Phone (e.g., +1 206 555 0101)"/>
+          <div class="btnrow">
+            <button class="btn primary" id="save">Save</button>
+            <button class="btn gray" id="ask">One-Tap Ask</button>
+          </div>
+          <div class="footer" id="savedLine"></div>
+        </div>
+
+        <div class="card" id="escort">
+          <div class="h2">Family Escort Mode (P0)</div>
+          <div class="small">When enabled, high-risk scans prompt you to confirm with family.</div>
+
+          <div class="toggle">
+            <div>
+              <div style="font-weight:900">Escort Mode</div>
+              <div class="small">Reduce scam loss with a human confirmation step.</div>
+            </div>
+            <button class="btn gray" id="toggle">Toggle</button>
+          </div>
+
+          <div class="footer" id="escortLine"></div>
+
+          <div class="hr"></div>
+          <div class="h2">Why this works</div>
+          <div class="note">
+            Your interview results suggest direct warnings help, but repeated reminders are annoying.
+            Escort Mode interrupts only at critical moments.
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="emergency" style="margin-top:14px;">
+        <div class="inbox-header">
+          <div>
+            <div class="h2">Emergency Support</div>
+            <div class="small">Use this if you feel pressured or unsafe.</div>
+          </div>
+          <a class="link" href="tools.html#toolkit">Response Toolkit →</a>
+        </div>
+
+        <div class="list">
+          <div class="item">
+            <div>
+              <strong>Hang up / stop chat</strong>
+              <div class="small">Scammers use urgency. Pause first.</div>
+            </div>
+            <span class="tag bad">Stop</span>
+          </div>
+          <div class="item">
+            <div>
+              <strong>Call official support</strong>
+              <div class="small">Use official numbers you find yourself.</div>
+            </div>
+            <span class="tag warn">Verify</span>
+          </div>
+          <div class="item">
+            <div>
+              <strong>Contact family now</strong>
+              <div class="small">Use One-Tap Ask to get help quickly.</div>
+            </div>
+            <span class="tag good">Help</span>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const nameI = document.getElementById("name");
+        const phoneI = document.getElementById("phone");
+        const saveBtn = document.getElementById("save");
+        const askBtn = document.getElementById("ask");
+        const savedLine = document.getElementById("savedLine");
+
+        const toggleBtn = document.getElementById("toggle");
+        const escortLine = document.getElementById("escortLine");
+
+        function refresh(){
+          const s = store.get("settings", DEFAULTS);
+          const c = s.emergencyContacts?.[0] || {name:"", phone:""};
+          nameI.value = c.name || "";
+          phoneI.value = c.phone || "";
+          savedLine.textContent = c.phone ? `Saved: ${c.name} (${c.phone})` : "No contact saved.";
+          escortLine.textContent = `Escort Mode: ${s.escortMode ? "ON" : "OFF"}`;
+        }
+        refresh();
+
+        saveBtn.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          s.emergencyContacts = [{name: nameI.value.trim() || "Family", phone: phoneI.value.trim()}];
+          store.set("settings", s);
+          refresh();
+          alert("Saved!");
+        });
+
+        askBtn.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          const c = s.emergencyContacts?.[0];
+          if(!c?.phone){
+            alert("No contact set. Please save one first.");
+            return;
+          }
+          const payload = "我现在遇到可能的诈骗信息/电话，我先不转账不提供验证码。请你帮我确认。";
+          const {to, text} = buildFamilyMessage(payload);
+          openSMS(to, text);
+        });
+
+        toggleBtn.addEventListener("click", ()=>{
+          const s = store.get("settings", DEFAULTS);
+          s.escortMode = !s.escortMode;
+          store.set("settings", s);
+          refresh();
+          alert(`Escort Mode is now ${s.escortMode ? "ON" : "OFF"}`);
+        });
+      </script>
+    </main>
+  </div>
+</body>
+</html>
