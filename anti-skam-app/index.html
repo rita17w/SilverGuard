@@ -1,176 +1,335 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>SafeGuard – Dashboard</title>
-  <link rel="stylesheet" href="css/styles.css"/>
-  <script defer src="js/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeGuard — Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body data-page="dashboard">
   <div class="app">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Primary navigation">
       <div class="brand">
-        <div class="logo">🛡️</div>
-        <div>
-          <div class="brand-title">SafeGuard</div>
-          <div class="brand-sub">Scam Protection</div>
+        <div class="brand__mark" aria-hidden="true">🛡️</div>
+        <div class="brand__text">
+          <div class="brand__name">SafeGuard</div>
+          <div class="brand__tag">Scam Protection Workspace</div>
         </div>
       </div>
 
-      <div class="nav">
-        <a data-nav href="index.html">🏠 Dashboard</a>
-        <a data-nav href="scan.html">🧾 Scan History</a>
-        <a data-nav href="tools.html">🧩 Extension Demo</a>
+      <nav class="nav">
+        <div class="nav__section">WORKSPACE</div>
+        <a class="nav__item" href="index.html" data-nav="dashboard">Dashboard</a>
+        <a class="nav__item" href="scan.html" data-nav="scan">Scans & Inbox</a>
 
-        <div class="nav-section">Safety Tools</div>
-        <a data-nav href="tools.html">🔗 Link & QR Check</a>
-        <a data-nav href="tools.html#number">📞 Number Lookup</a>
-        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
-        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+        <div class="nav__section">SAFETY TOOLS</div>
+        <a class="nav__item" href="tools.html" data-nav="tools">Tools</a>
 
-        <div class="nav-section">Family & Support</div>
-        <a data-nav href="family.html">👥 Trusted Contacts</a>
-        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
-        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+        <div class="nav__section">FAMILY & SUPPORT</div>
+        <a class="nav__item" href="family.html" data-nav="family">Family & Support</a>
 
-        <div class="nav-section">Learn & Practice</div>
-        <a data-nav href="learn.html">📚 Education Hub</a>
+        <div class="nav__section">LEARN & PRACTICE</div>
+        <a class="nav__item" href="learn.html" data-nav="learn">Education & Drills</a>
+
+        <div class="nav__section">SETTINGS</div>
+        <a class="nav__item" href="settings.html" data-nav="settings">Settings</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="mini-help">
+          <div class="mini-help__title">Need help?</div>
+          <div class="mini-help__text">You’re not alone. We’ll verify together.</div>
+          <button class="btn btn--secondary btn--full" data-open="emergency-modal">Emergency Support</button>
+        </div>
       </div>
     </aside>
 
-    <!-- MAIN -->
-    <main class="main">
-      <div class="topbar">
-        <div class="h1">Dashboard</div>
+    <!-- Main -->
+    <div class="main">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Dashboard</h1>
+          <div class="page-subtitle">Welcome back, Margaret. Your safety workspace is ready.</div>
+        </div>
 
-        <div class="top-actions">
-          <button class="iconbtn badge" title="Notifications">🔔</button>
-          <button class="iconbtn" title="Settings" onclick="location.href='settings.html'">⚙️</button>
-
-          <div class="userchip">
-            <div class="avatar">M</div>
-            <div>
-              <div style="font-weight:900;line-height:1">Margaret Smith</div>
-              <div class="small">Senior User</div>
+        <div class="topbar__right">
+          <button class="icon-btn" title="Notifications" aria-label="Notifications">🔔</button>
+          <button class="icon-btn" title="Help" aria-label="Help">❓</button>
+          <div class="user-chip" aria-label="User profile">
+            <div class="user-chip__avatar" aria-hidden="true">M</div>
+            <div class="user-chip__text">
+              <div class="user-chip__name">Margaret Smith</div>
+              <div class="user-chip__role">Senior User</div>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <!-- HERO BANNER -->
-      <section class="hero">
+      <main class="content">
+        <!-- Hero -->
+        <section class="hero">
+          <div class="hero__copy">
+            <div class="hero__title">Protect yourself from scams — calmly and confidently.</div>
+            <div class="hero__desc">
+              Capture suspicious content using the browser extension or upload a screenshot here.
+              We’ll scan it and explain the results in plain language.
+            </div>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="scan.html#capture">Upload Screenshot</a>
+              <a class="btn btn--secondary" href="scan.html#extension">Extension Demo</a>
+            </div>
+          </div>
+          <div class="hero__stats" role="group" aria-label="Today stats">
+            <div class="stat">
+              <div class="stat__num">12</div>
+              <div class="stat__label">Scans Today</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">3</div>
+              <div class="stat__label">Blocked</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">98%</div>
+              <div class="stat__label">Health Score</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- KPI cards -->
+        <section class="grid grid--4">
+          <div class="card">
+            <div class="card__top">
+              <div class="card__title">Pending Review</div>
+              <span class="badge badge--neutral">Queue</span>
+            </div>
+            <div class="card__big">2</div>
+            <div class="card__muted">Screenshots waiting</div>
+          </div>
+
+          <div class="card card--tint-danger">
+            <div class="card__top">
+              <div class="card__title">High Risk</div>
+              <span class="badge badge--danger">Needs attention</span>
+            </div>
+            <div class="card__big">1</div>
+            <div class="card__muted">Open results and follow next steps</div>
+          </div>
+
+          <div class="card card--tint-success">
+            <div class="card__top">
+              <div class="card__title">Safe Items</div>
+              <span class="badge badge--success">This week</span>
+            </div>
+            <div class="card__big">9</div>
+            <div class="card__muted">Verified safe captures</div>
+          </div>
+
+          <div class="card card--tint-info">
+            <div class="card__top">
+              <div class="card__title">Protection</div>
+              <span class="badge badge--info">Active</span>
+            </div>
+            <div class="card__big">On</div>
+            <div class="card__muted">All systems ready</div>
+          </div>
+        </section>
+
+        <!-- Screenshot Inbox / Evidence Tray (core bridge) -->
+        <section class="panel">
+          <div class="panel__head">
+            <div>
+              <div class="panel__title">Screenshot Inbox (Evidence Tray)</div>
+              <div class="panel__sub">Captured screenshots appear here. Open one to view analysis and next steps.</div>
+            </div>
+            <a class="btn btn--ghost" href="scan.html">View All →</a>
+          </div>
+
+          <div class="tray">
+            <article class="tray-item" data-open-item="1">
+              <div class="thumb" aria-hidden="true">
+                <div class="thumb__label">Chat</div>
+              </div>
+              <div class="tray-item__meta">
+                <div class="tray-item__row">
+                  <div class="tray-item__title">“Bank Support” urgent message</div>
+                  <span class="badge badge--danger">High</span>
+                </div>
+                <div class="tray-item__row tray-item__sub">
+                  <span class="pill">Source: Chat</span>
+                  <span class="pill">Status: Flagged</span>
+                  <span class="pill">2:14 PM</span>
+                </div>
+                <div class="tray-item__actions">
+                  <button class="btn btn--small btn--primary" data-action="open-item" data-item="1">Open</button>
+                  <button class="btn btn--small btn--secondary" data-action="analyze" data-item="1">Analyze</button>
+                  <button class="btn btn--small btn--ghost" data-action="share" data-item="1">Ask Family</button>
+                  <button class="btn btn--small btn--ghost" data-action="toolkit" data-item="1">Move to Toolkit</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="tray-item" data-open-item="2">
+              <div class="thumb" aria-hidden="true">
+                <div class="thumb__label">Transfer</div>
+              </div>
+              <div class="tray-item__meta">
+                <div class="tray-item__row">
+                  <div class="tray-item__title">Wire transfer page screenshot</div>
+                  <span class="badge badge--warn">Medium</span>
+                </div>
+                <div class="tray-item__row tray-item__sub">
+                  <span class="pill">Source: Transfer Page</span>
+                  <span class="pill">Status: Pending</span>
+                  <span class="pill">1:58 PM</span>
+                </div>
+                <div class="tray-item__actions">
+                  <button class="btn btn--small btn--primary" data-action="open-item" data-item="2">Open</button>
+                  <button class="btn btn--small btn--secondary" data-action="analyze" data-item="2">Analyze</button>
+                  <button class="btn btn--small btn--ghost" data-action="share" data-item="2">Ask Family</button>
+                  <button class="btn btn--small btn--ghost" data-action="toolkit" data-item="2">Move to Toolkit</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="tray-item" data-open-item="3">
+              <div class="thumb" aria-hidden="true">
+                <div class="thumb__label">QR</div>
+              </div>
+              <div class="tray-item__meta">
+                <div class="tray-item__row">
+                  <div class="tray-item__title">QR code flyer</div>
+                  <span class="badge badge--success">Low</span>
+                </div>
+                <div class="tray-item__row tray-item__sub">
+                  <span class="pill">Source: Web Page</span>
+                  <span class="pill">Status: Safe</span>
+                  <span class="pill">Yesterday</span>
+                </div>
+                <div class="tray-item__actions">
+                  <button class="btn btn--small btn--primary" data-action="open-item" data-item="3">Open</button>
+                  <button class="btn btn--small btn--secondary" data-action="analyze" data-item="3">Analyze</button>
+                  <button class="btn btn--small btn--ghost" data-action="share" data-item="3">Ask Family</button>
+                  <button class="btn btn--small btn--ghost" data-action="toolkit" data-item="3">Move to Toolkit</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Quick next steps -->
+        <section class="grid grid--2">
+          <div class="card">
+            <div class="card__title">Recommended Next Steps</div>
+            <ul class="list">
+              <li><strong>Pause</strong> transfers and don’t share codes.</li>
+              <li><strong>Verify</strong> using official numbers (not the message).</li>
+              <li><strong>Ask family</strong> if you feel pressured.</li>
+              <li><strong>Save evidence</strong> and report if needed.</li>
+            </ul>
+            <div class="card__note">This is not your fault. Scammers are professionals.</div>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Companion AI</div>
+            <div class="card__muted">Describe what happened in your own words — we’ll guide you.</div>
+            <div class="chat-preview">
+              <div class="chat-bubble chat-bubble--ai">Hi Margaret — share the message or screenshot, and we’ll verify it together.</div>
+              <div class="chat-bubble">They said my account will be locked unless I act now.</div>
+              <div class="chat-actions">
+                <a class="btn btn--primary" href="scan.html#assistant">Open Companion AI</a>
+                <a class="btn btn--ghost" href="learn.html">Learn scam patterns</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Item Drawer (shared UI) -->
+    <aside class="drawer" aria-label="Item details" data-drawer>
+      <div class="drawer__head">
         <div>
-          <div class="hero-title">Welcome back, Margaret!</div>
-          <p class="hero-sub">
-            Your safety workspace is ready. Review captured screenshots and stay protected from scams.
+          <div class="drawer__title">Scan Result</div>
+          <div class="drawer__sub">Risk badge, confidence check, why suspicious, next actions.</div>
+        </div>
+        <button class="icon-btn" data-close-drawer aria-label="Close">✕</button>
+      </div>
+
+      <div class="drawer__body">
+        <div class="result-badge">
+          <span class="badge badge--danger">High Risk</span>
+          <span class="pill">Confidence: High</span>
+        </div>
+
+        <div class="card card--flat">
+          <div class="card__title">Plain-language explanation</div>
+          <p class="p">
+            This message uses urgency (“act now”), asks for sensitive action, and may be impersonating an institution.
+            Let’s verify before you do anything.
           </p>
+        </div>
 
-          <div class="hero-buttons">
-            <button class="btn light" onclick="location.href='scan.html'">Upload Screenshot</button>
-            <button class="btn dark" onclick="location.href='tools.html'">Extension Demo</button>
+        <div class="card card--flat">
+          <div class="card__title">Why it was flagged (behavioral signals)</div>
+          <div class="chips">
+            <span class="chip chip--danger">Urgency</span>
+            <span class="chip chip--danger">Fear/Threat</span>
+            <span class="chip chip--warn">Impersonation</span>
+            <span class="chip chip--warn">Payment pressure</span>
           </div>
         </div>
 
-        <div class="hero-metrics">
-          <div class="metric">
-            <div class="num">12</div>
-            <div class="lab">Scans Today</div>
+        <div class="card card--flat">
+          <div class="card__title">Next actions</div>
+          <div class="actions">
+            <button class="btn btn--primary" data-open="emergency-modal">One-Tap Family Ask</button>
+            <a class="btn btn--secondary" href="tools.html#number">Number Lookup</a>
+            <a class="btn btn--secondary" href="tools.html#linkqr">Link & QR Check</a>
+            <a class="btn btn--ghost" href="tools.html#toolkit">Save Evidence / Report</a>
           </div>
-          <div class="metric">
-            <div class="num">3</div>
-            <div class="lab">Blocked</div>
-          </div>
-          <div class="metric">
-            <div class="num">98%</div>
-            <div class="lab">Safety Score</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- KPI CARDS -->
-      <div class="grid cards4" style="margin-top:14px;">
-        <div class="card">
-          <div class="kpi">
-            <div>
-              <div class="title">Pending Review</div>
-              <div class="sub">Screenshots waiting</div>
-            </div>
-            <div class="value">2</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="kpi bad">
-            <div>
-              <div class="title">High Risk</div>
-              <div class="sub">Needs attention</div>
-            </div>
-            <div class="value">1</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="kpi good">
-            <div>
-              <div class="title">Safe Items</div>
-              <div class="sub">This week</div>
-            </div>
-            <div class="value">9</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="kpi blue">
-            <div>
-              <div class="title">Protection</div>
-              <div class="sub">All systems ready</div>
-            </div>
-            <div class="value">Active</div>
-          </div>
+          <div class="hint">Family support is always user-controlled unless you enable auto-alert in Settings.</div>
         </div>
       </div>
+    </aside>
 
-      <!-- INBOX -->
-      <div class="card" style="margin-top:14px;">
-        <div class="inbox-header">
+    <!-- Emergency Support Modal -->
+    <div class="modal" data-modal="emergency-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Emergency support">
+        <div class="modal__head">
           <div>
-            <div class="h2">Screenshot Inbox</div>
-            <div class="small">Review captured screenshots and view safety analysis</div>
+            <div class="modal__title">Emergency Support</div>
+            <div class="modal__sub">You’re in control. Choose a safe next step.</div>
           </div>
-          <a class="link" href="scan.html">View All →</a>
+          <button class="icon-btn" data-close-modal aria-label="Close">✕</button>
         </div>
 
-        <div class="list">
-          <div class="item">
-            <div>
-              <div style="font-weight:900">“Your account is suspended…”</div>
-              <div class="small">Captured 5 min ago • asks for verification code</div>
-            </div>
-            <span class="tag bad">High Risk</span>
+        <div class="modal__body">
+          <div class="card card--flat">
+            <div class="card__title">One-Tap Family Ask</div>
+            <p class="p">Send a quick “Can you help me verify this?” message to a trusted contact.</p>
+            <button class="btn btn--primary btn--full">Ask Family Now</button>
           </div>
 
-          <div class="item">
-            <div>
-              <div style="font-weight:900">USPS delivery fee link</div>
-              <div class="small">Captured 40 min ago • short link detected</div>
-            </div>
-            <span class="tag warn">Suspicious</span>
+          <div class="card card--flat">
+            <div class="card__title">Family Alert (requires confirmation)</div>
+            <p class="p">If you feel unsafe or pressured, alert a caregiver. You can cancel before sending.</p>
+            <button class="btn btn--secondary btn--full">Review & Send Alert</button>
           </div>
 
-          <div class="item">
-            <div>
-              <div style="font-weight:900">Bank login notification</div>
-              <div class="small">Captured yesterday • from trusted domain</div>
-            </div>
-            <span class="tag good">Safe</span>
+          <div class="card card--flat">
+            <div class="card__title">Safety Recovery Steps</div>
+            <p class="p">If you already clicked or paid, follow damage control steps.</p>
+            <a class="btn btn--ghost btn--full" href="family.html#recovery">Go to Recovery</a>
           </div>
         </div>
       </div>
-    </main>
+    </div>
 
   </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>

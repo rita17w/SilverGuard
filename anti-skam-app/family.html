@@ -1,186 +1,175 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>SafeGuard – Family</title>
-  <link rel="stylesheet" href="css/styles.css"/>
-  <script defer src="js/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeGuard — Family & Support</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body data-page="family">
   <div class="app">
-
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Primary navigation">
       <div class="brand">
-        <div class="logo">🛡️</div>
-        <div>
-          <div class="brand-title">SafeGuard</div>
-          <div class="brand-sub">Scam Protection</div>
+        <div class="brand__mark" aria-hidden="true">🛡️</div>
+        <div class="brand__text">
+          <div class="brand__name">SafeGuard</div>
+          <div class="brand__tag">Scam Protection Workspace</div>
         </div>
       </div>
 
-      <div class="nav">
-        <a data-nav href="index.html">🏠 Dashboard</a>
-        <a data-nav href="scan.html">🧾 Scan History</a>
-        <a data-nav href="tools.html">🧩 Extension Demo</a>
+      <nav class="nav">
+        <div class="nav__section">WORKSPACE</div>
+        <a class="nav__item" href="index.html" data-nav="dashboard">Dashboard</a>
+        <a class="nav__item" href="scan.html" data-nav="scan">Scans & Inbox</a>
 
-        <div class="nav-section">Safety Tools</div>
-        <a data-nav href="tools.html">🔗 Link & QR Check</a>
-        <a data-nav href="tools.html#number">📞 Number Lookup</a>
-        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
-        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+        <div class="nav__section">SAFETY TOOLS</div>
+        <a class="nav__item" href="tools.html" data-nav="tools">Tools</a>
 
-        <div class="nav-section">Family & Support</div>
-        <a data-nav href="family.html">👥 Trusted Contacts</a>
-        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
-        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+        <div class="nav__section">FAMILY & SUPPORT</div>
+        <a class="nav__item" href="family.html" data-nav="family">Family & Support</a>
 
-        <div class="nav-section">Learn & Practice</div>
-        <a data-nav href="learn.html">📚 Education Hub</a>
-      </div>
+        <div class="nav__section">LEARN & PRACTICE</div>
+        <a class="nav__item" href="learn.html" data-nav="learn">Education & Drills</a>
+
+        <div class="nav__section">SETTINGS</div>
+        <a class="nav__item" href="settings.html" data-nav="settings">Settings</a>
+      </nav>
     </aside>
 
-    <main class="main">
-      <div class="topbar">
-        <div>
-          <div class="h1">Family & Support</div>
-          <div class="small">Trusted contacts, escort mode, emergency support.</div>
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Family & Support</h1>
+          <div class="page-subtitle">Trusted contacts, escort mode, and recovery steps.</div>
         </div>
-        <div class="top-actions">
-          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
-          <button class="iconbtn" onclick="location.href='settings.html'" title="Settings">⚙️</button>
-          <div class="userchip">
-            <div class="avatar">M</div>
-            <div>
-              <div style="font-weight:800;line-height:1">Margaret Smith</div>
-              <div class="small">Senior User</div>
+        <div class="topbar__right">
+          <button class="btn btn--primary" data-open="emergency-modal">One-Tap Family Ask</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="grid grid--2">
+          <div class="card">
+            <div class="card__title">Trusted Contacts</div>
+            <div class="card__muted">Choose who can help you verify suspicious messages.</div>
+
+            <div class="contact">
+              <div class="contact__avatar" aria-hidden="true">A</div>
+              <div class="contact__meta">
+                <div class="contact__name">Alex (Son)</div>
+                <div class="contact__sub">Primary helper • SMS + Email</div>
+              </div>
+              <span class="badge badge--success">Active</span>
+            </div>
+
+            <div class="contact">
+              <div class="contact__avatar" aria-hidden="true">J</div>
+              <div class="contact__meta">
+                <div class="contact__name">Jill (Daughter)</div>
+                <div class="contact__sub">Backup helper</div>
+              </div>
+              <span class="badge badge--neutral">Available</span>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn--secondary">Add Contact</button>
+              <button class="btn btn--ghost">Manage Permissions</button>
+            </div>
+
+            <div class="hint">Family support is always user-controlled unless enabled in Settings.</div>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Family Escort Mode</div>
+            <div class="card__muted">A caregiver can guide you through risky steps safely.</div>
+
+            <div class="callout callout--info">
+              <strong>How it works:</strong> When you open a High Risk result, you can invite a helper to review it with you.
+            </div>
+
+            <div class="actions">
+              <button class="btn btn--primary">Start Escort Session</button>
+              <button class="btn btn--secondary">Escort Settings</button>
+            </div>
+
+            <div class="mini-kpi">
+              <div class="mini-kpi__item">
+                <div class="mini-kpi__num">2</div>
+                <div class="mini-kpi__lbl">Sessions this month</div>
+              </div>
+              <div class="mini-kpi__item">
+                <div class="mini-kpi__num">0</div>
+                <div class="mini-kpi__lbl">Unresolved alerts</div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="grid cards2">
-        <div class="card">
-          <div class="h2">Trusted Contacts</div>
-          <div class="small">Add one family contact for One-Tap Ask.</div>
-          <div class="hr"></div>
-
-          <input id="name" class="input" placeholder="Name (e.g., Daughter)"/>
-          <div style="height:10px"></div>
-          <input id="phone" class="input" placeholder="Phone (e.g., +1 206 555 0101)"/>
-          <div class="btnrow">
-            <button class="btn primary" id="save">Save</button>
-            <button class="btn gray" id="ask">One-Tap Ask</button>
-          </div>
-          <div class="footer" id="savedLine"></div>
-        </div>
-
-        <div class="card" id="escort">
-          <div class="h2">Family Escort Mode (P0)</div>
-          <div class="small">When enabled, high-risk scans prompt you to confirm with family.</div>
-
-          <div class="toggle">
+        <section class="panel" id="recovery">
+          <div class="panel__head">
             <div>
-              <div style="font-weight:900">Escort Mode</div>
-              <div class="small">Reduce scam loss with a human confirmation step.</div>
+              <div class="panel__title">Safety Recovery (Damage Control)</div>
+              <div class="panel__sub">If you clicked, shared codes, or sent money — follow these steps.</div>
             </div>
-            <button class="btn gray" id="toggle">Toggle</button>
           </div>
 
-          <div class="footer" id="escortLine"></div>
-
-          <div class="hr"></div>
-          <div class="h2">Why this works</div>
-          <div class="note">
-            Your interview results suggest direct warnings help, but repeated reminders are annoying.
-            Escort Mode interrupts only at critical moments.
+          <div class="grid grid--3">
+            <div class="card card--flat">
+              <div class="card__title">1) Stop the action</div>
+              <ul class="list">
+                <li>Pause transfer or payment.</li>
+                <li>Disconnect screen share.</li>
+                <li>Do not send verification codes.</li>
+              </ul>
+            </div>
+            <div class="card card--flat">
+              <div class="card__title">2) Secure accounts</div>
+              <ul class="list">
+                <li>Change passwords (official site).</li>
+                <li>Enable 2-factor authentication.</li>
+                <li>Check for new payees.</li>
+              </ul>
+            </div>
+            <div class="card card--flat">
+              <div class="card__title">3) Report & document</div>
+              <ul class="list">
+                <li>Save Evidence Pack.</li>
+                <li>Contact bank using official phone.</li>
+                <li>Report the scam (toolkit).</li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="card" id="emergency" style="margin-top:14px;">
-        <div class="inbox-header">
+          <div class="callout callout--success">
+            <strong>This is not your fault.</strong> Scams are designed to pressure good people. You did the right thing by checking.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" data-modal="emergency-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Emergency support">
+        <div class="modal__head">
           <div>
-            <div class="h2">Emergency Support</div>
-            <div class="small">Use this if you feel pressured or unsafe.</div>
+            <div class="modal__title">One-Tap Family Ask</div>
+            <div class="modal__sub">Send a verification request to a trusted contact.</div>
           </div>
-          <a class="link" href="tools.html#toolkit">Response Toolkit →</a>
+          <button class="icon-btn" data-close-modal aria-label="Close">✕</button>
         </div>
-
-        <div class="list">
-          <div class="item">
-            <div>
-              <strong>Hang up / stop chat</strong>
-              <div class="small">Scammers use urgency. Pause first.</div>
-            </div>
-            <span class="tag bad">Stop</span>
+        <div class="modal__body">
+          <label class="label">Message</label>
+          <textarea class="textarea" rows="4">Can you help me verify this message? I feel pressured to act quickly.</textarea>
+          <div class="actions">
+            <button class="btn btn--primary">Send</button>
+            <button class="btn btn--secondary" data-close-modal>Cancel</button>
           </div>
-          <div class="item">
-            <div>
-              <strong>Call official support</strong>
-              <div class="small">Use official numbers you find yourself.</div>
-            </div>
-            <span class="tag warn">Verify</span>
-          </div>
-          <div class="item">
-            <div>
-              <strong>Contact family now</strong>
-              <div class="small">Use One-Tap Ask to get help quickly.</div>
-            </div>
-            <span class="tag good">Help</span>
-          </div>
+          <div class="hint">You can review and cancel before anything is sent.</div>
         </div>
       </div>
+    </div>
 
-      <script>
-        const nameI = document.getElementById("name");
-        const phoneI = document.getElementById("phone");
-        const saveBtn = document.getElementById("save");
-        const askBtn = document.getElementById("ask");
-        const savedLine = document.getElementById("savedLine");
-
-        const toggleBtn = document.getElementById("toggle");
-        const escortLine = document.getElementById("escortLine");
-
-        function refresh(){
-          const s = store.get("settings", DEFAULTS);
-          const c = s.emergencyContacts?.[0] || {name:"", phone:""};
-          nameI.value = c.name || "";
-          phoneI.value = c.phone || "";
-          savedLine.textContent = c.phone ? `Saved: ${c.name} (${c.phone})` : "No contact saved.";
-          escortLine.textContent = `Escort Mode: ${s.escortMode ? "ON" : "OFF"}`;
-        }
-        refresh();
-
-        saveBtn.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          s.emergencyContacts = [{name: nameI.value.trim() || "Family", phone: phoneI.value.trim()}];
-          store.set("settings", s);
-          refresh();
-          alert("Saved!");
-        });
-
-        askBtn.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          const c = s.emergencyContacts?.[0];
-          if(!c?.phone){
-            alert("No contact set. Please save one first.");
-            return;
-          }
-          const payload = "我现在遇到可能的诈骗信息/电话，我先不转账不提供验证码。请你帮我确认。";
-          const {to, text} = buildFamilyMessage(payload);
-          openSMS(to, text);
-        });
-
-        toggleBtn.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          s.escortMode = !s.escortMode;
-          store.set("settings", s);
-          refresh();
-          alert(`Escort Mode is now ${s.escortMode ? "ON" : "OFF"}`);
-        });
-      </script>
-    </main>
   </div>
+  <script src="js/app.js"></script>
 </body>
 </html>

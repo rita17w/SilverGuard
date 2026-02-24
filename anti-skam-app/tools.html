@@ -1,190 +1,143 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>SafeGuard – Tools</title>
-  <link rel="stylesheet" href="css/styles.css"/>
-  <script defer src="js/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeGuard — Tools</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body data-page="tools">
   <div class="app">
-
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Primary navigation">
       <div class="brand">
-        <div class="logo">🛡️</div>
-        <div>
-          <div class="brand-title">SafeGuard</div>
-          <div class="brand-sub">Scam Protection</div>
+        <div class="brand__mark" aria-hidden="true">🛡️</div>
+        <div class="brand__text">
+          <div class="brand__name">SafeGuard</div>
+          <div class="brand__tag">Scam Protection Workspace</div>
         </div>
       </div>
 
-      <div class="nav">
-        <a data-nav href="index.html">🏠 Dashboard</a>
-        <a data-nav href="scan.html">🧾 Scan History</a>
-        <a data-nav href="tools.html">🧩 Extension Demo</a>
+      <nav class="nav">
+        <div class="nav__section">WORKSPACE</div>
+        <a class="nav__item" href="index.html" data-nav="dashboard">Dashboard</a>
+        <a class="nav__item" href="scan.html" data-nav="scan">Scans & Inbox</a>
 
-        <div class="nav-section">Safety Tools</div>
-        <a data-nav href="tools.html">🔗 Link & QR Check</a>
-        <a data-nav href="tools.html#number">📞 Number Lookup</a>
-        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
-        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+        <div class="nav__section">SAFETY TOOLS</div>
+        <a class="nav__item" href="tools.html" data-nav="tools">Tools</a>
 
-        <div class="nav-section">Family & Support</div>
-        <a data-nav href="family.html">👥 Trusted Contacts</a>
-        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
-        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+        <div class="nav__section">FAMILY & SUPPORT</div>
+        <a class="nav__item" href="family.html" data-nav="family">Family & Support</a>
 
-        <div class="nav-section">Learn & Practice</div>
-        <a data-nav href="learn.html">📚 Education Hub</a>
+        <div class="nav__section">LEARN & PRACTICE</div>
+        <a class="nav__item" href="learn.html" data-nav="learn">Education & Drills</a>
+
+        <div class="nav__section">SETTINGS</div>
+        <a class="nav__item" href="settings.html" data-nav="settings">Settings</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <button class="btn btn--secondary btn--full" data-open="emergency-modal">Emergency Support</button>
       </div>
     </aside>
 
-    <main class="main">
-      <div class="topbar">
-        <div>
-          <div class="h1">Safety Tools</div>
-          <div class="small">Link/QR checks, scam number lookup, response toolkit.</div>
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Safety Tools</h1>
+          <div class="page-subtitle">Check links, numbers, read text aloud, and save evidence.</div>
         </div>
-        <div class="top-actions">
-          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
-          <button class="iconbtn" onclick="location.href='settings.html'" title="Settings">⚙️</button>
-          <div class="userchip">
-            <div class="avatar">M</div>
-            <div>
-              <div style="font-weight:800;line-height:1">Margaret Smith</div>
-              <div class="small">Senior User</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </header>
 
-      <div class="grid cards2">
-        <div class="card">
-          <div class="h2">Link & QR Check</div>
-          <div class="small">Paste a URL (for QR, paste the decoded URL).</div>
-          <div class="hr"></div>
-          <input id="url" class="input" placeholder="https://example.com"/>
-          <div class="btnrow">
-            <button class="btn primary" id="check">Check</button>
-            <button class="btn gray" id="clear">Clear</button>
-          </div>
-
-          <div id="risk" class="riskbox good" style="display:none;">
-            <div>
-              <div style="font-weight:900" id="title">Low Risk</div>
-              <div class="small" id="zh"></div>
-              <div class="small" id="note"></div>
+      <main class="content">
+        <section class="grid grid--2" id="linkqr">
+          <div class="card">
+            <div class="card__title">Link & QR Safety Check</div>
+            <div class="card__muted">Paste a link or scan a QR (prototype).</div>
+            <div class="form">
+              <label class="label">URL or text from QR</label>
+              <input class="input" placeholder="https://example.com/verify" />
+              <div class="actions">
+                <button class="btn btn--primary">Check Safety</button>
+                <button class="btn btn--ghost">Explain Result</button>
+              </div>
             </div>
-            <div style="text-align:right">
-              <div class="meter"><div id="bar" style="width:0%"></div></div>
-              <div class="small"><span id="score">0</span>/100</div>
+            <div class="callout callout--warn">
+              <strong>Tip:</strong> Never trust a link from a message. Verify from the official website.
             </div>
           </div>
 
-          <ul class="note" id="reasons" style="margin:10px 0 0 0; padding-left:18px;"></ul>
-        </div>
-
-        <div class="card" id="number">
-          <div class="h2">Number Lookup</div>
-          <div class="small">Prototype: compares against a local “reported list”.</div>
-          <div class="hr"></div>
-          <input id="phone" class="input" placeholder="+1 206 555 0101"/>
-          <div class="btnrow">
-            <button class="btn primary" id="lookup">Lookup</button>
-            <button class="btn gray" id="pclear">Clear</button>
+          <div class="card" id="number">
+            <div class="card__title">Scam Number Lookup</div>
+            <div class="card__muted">Look up phone numbers or SMS senders.</div>
+            <div class="form">
+              <label class="label">Phone number</label>
+              <input class="input" placeholder="+1 (555) 123-4567" />
+              <div class="actions">
+                <button class="btn btn--primary">Lookup</button>
+                <button class="btn btn--secondary">Block / Silence</button>
+              </div>
+            </div>
+            <div class="callout callout--info">
+              <strong>Supportive note:</strong> It’s normal to feel pressured. We’ll check it together.
+            </div>
           </div>
-          <div id="out" class="note" style="margin-top:10px;"></div>
-        </div>
-      </div>
+        </section>
 
-      <div class="card" id="toolkit" style="margin-top:14px;">
-        <div class="inbox-header">
+        <section class="grid grid--2">
+          <div class="card" id="tts">
+            <div class="card__title">Text-to-Speech Reader</div>
+            <div class="card__muted">Paste message text and listen (prototype).</div>
+            <label class="label">Message text</label>
+            <textarea class="textarea" rows="6" placeholder="Paste the message here…"></textarea>
+            <div class="actions">
+              <button class="btn btn--primary">Read Aloud</button>
+              <button class="btn btn--secondary">Slow Voice</button>
+              <button class="btn btn--ghost">Highlight Risk Phrases</button>
+            </div>
+          </div>
+
+          <div class="card" id="toolkit">
+            <div class="card__title">Lightweight Response Toolkit</div>
+            <div class="card__muted">Save evidence, report scams, contact bank safely.</div>
+            <div class="toolkit">
+              <button class="btn btn--primary btn--full">Save Evidence Pack</button>
+              <button class="btn btn--secondary btn--full">Report Scam</button>
+              <button class="btn btn--secondary btn--full">Contact Bank (Official)</button>
+              <button class="btn btn--ghost btn--full">Create “Do Not Disturb” Rule</button>
+            </div>
+            <div class="hint">We’ll keep copies so you don’t have to remember every detail.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" data-modal="emergency-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Emergency support">
+        <div class="modal__head">
           <div>
-            <div class="h2">Response Toolkit</div>
-            <div class="small">What to do when risk is high (quick checklist).</div>
+            <div class="modal__title">Emergency Support</div>
+            <div class="modal__sub">You’re in control. Choose a safe next step.</div>
           </div>
-          <a class="link" href="family.html#emergency">Emergency Support →</a>
+          <button class="icon-btn" data-close-modal aria-label="Close">✕</button>
         </div>
-
-        <div class="list">
-          <div class="item">
-            <div>
-              <strong>1) Stop immediately</strong>
-              <div class="small">Do not transfer money, do not share codes, do not install remote apps.</div>
-            </div>
-            <span class="tag bad">Must</span>
+        <div class="modal__body">
+          <div class="card card--flat">
+            <div class="card__title">One-Tap Family Ask</div>
+            <p class="p">Send: “Can you help me verify this?”</p>
+            <button class="btn btn--primary btn--full">Ask Family Now</button>
           </div>
-          <div class="item">
-            <div>
-              <strong>2) Verify via official channels</strong>
-              <div class="small">Use official phone numbers you find yourself (not the scammer’s).</div>
-            </div>
-            <span class="tag warn">Verify</span>
-          </div>
-          <div class="item">
-            <div>
-              <strong>3) Ask a trusted contact</strong>
-              <div class="small">Use One-Tap Family Ask to get help before acting.</div>
-            </div>
-            <span class="tag good">Support</span>
+          <div class="card card--flat">
+            <div class="card__title">Safety Recovery</div>
+            <p class="p">If you clicked or paid, follow recovery steps.</p>
+            <a class="btn btn--ghost btn--full" href="family.html#recovery">Go to Recovery</a>
           </div>
         </div>
       </div>
+    </div>
 
-      <script>
-        const url = document.getElementById("url");
-        const checkBtn = document.getElementById("check");
-        const clearBtn = document.getElementById("clear");
-
-        const risk = document.getElementById("risk");
-        const title = document.getElementById("title");
-        const zh = document.getElementById("zh");
-        const note = document.getElementById("note");
-        const bar = document.getElementById("bar");
-        const scoreEl = document.getElementById("score");
-        const reasons = document.getElementById("reasons");
-
-        checkBtn.addEventListener("click", ()=>{
-          const r = checkUrl(url.value);
-          const meta = riskMeta(r.level === "high" ? "high" : r.level === "medium" ? "medium" : "low");
-          risk.style.display = "flex";
-          risk.className = `riskbox ${meta.cls}`;
-          title.textContent = meta.en;
-          zh.textContent = meta.zh;
-          note.textContent = "This is a prototype heuristic check.";
-          bar.style.width = `${r.score}%`;
-          scoreEl.textContent = r.score;
-          reasons.innerHTML = (r.reasons || []).map(x=>`<li>${x}</li>`).join("");
-        });
-
-        clearBtn.addEventListener("click", ()=>{
-          url.value = "";
-          risk.style.display = "none";
-          reasons.innerHTML = "";
-        });
-
-        const phone = document.getElementById("phone");
-        const lookupBtn = document.getElementById("lookup");
-        const pclear = document.getElementById("pclear");
-        const out = document.getElementById("out");
-        const REPORTED = ["+1 206 555 0101","206-555-0102","888-888-8888"];
-
-        lookupBtn.addEventListener("click", ()=>{
-          const p = phone.value.trim();
-          if(!p) return alert("Enter a number.");
-          const hit = REPORTED.some(x => x.replace(/\D/g,"") === p.replace(/\D/g,""));
-          out.innerHTML = hit
-            ? `<div class="riskbox bad"><div><div style="font-weight:900">Potential scam</div><div class="small">Found in local reported list (demo).</div></div><div class="tag bad">High Risk</div></div>`
-            : `<div class="riskbox good"><div><div style="font-weight:900">No match found</div><div class="small">Still verify if money/codes are requested.</div></div><div class="tag good">Safe</div></div>`;
-        });
-
-        pclear.addEventListener("click", ()=>{
-          phone.value = "";
-          out.innerHTML = "";
-        });
-      </script>
-    </main>
   </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>

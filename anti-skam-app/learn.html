@@ -1,201 +1,128 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>SafeGuard – Learn</title>
-  <link rel="stylesheet" href="css/styles.css"/>
-  <script defer src="js/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeGuard — Education & Drills</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body data-page="learn">
   <div class="app">
-
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Primary navigation">
       <div class="brand">
-        <div class="logo">🛡️</div>
-        <div>
-          <div class="brand-title">SafeGuard</div>
-          <div class="brand-sub">Scam Protection</div>
+        <div class="brand__mark" aria-hidden="true">🛡️</div>
+        <div class="brand__text">
+          <div class="brand__name">SafeGuard</div>
+          <div class="brand__tag">Scam Protection Workspace</div>
         </div>
       </div>
 
-      <div class="nav">
-        <a data-nav href="index.html">🏠 Dashboard</a>
-        <a data-nav href="scan.html">🧾 Scan History</a>
-        <a data-nav href="tools.html">🧩 Extension Demo</a>
+      <nav class="nav">
+        <div class="nav__section">WORKSPACE</div>
+        <a class="nav__item" href="index.html" data-nav="dashboard">Dashboard</a>
+        <a class="nav__item" href="scan.html" data-nav="scan">Scans & Inbox</a>
 
-        <div class="nav-section">Safety Tools</div>
-        <a data-nav href="tools.html">🔗 Link & QR Check</a>
-        <a data-nav href="tools.html#number">📞 Number Lookup</a>
-        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
-        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+        <div class="nav__section">SAFETY TOOLS</div>
+        <a class="nav__item" href="tools.html" data-nav="tools">Tools</a>
 
-        <div class="nav-section">Family & Support</div>
-        <a data-nav href="family.html">👥 Trusted Contacts</a>
-        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
-        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+        <div class="nav__section">FAMILY & SUPPORT</div>
+        <a class="nav__item" href="family.html" data-nav="family">Family & Support</a>
 
-        <div class="nav-section">Learn & Practice</div>
-        <a data-nav href="learn.html">📚 Education Hub</a>
-      </div>
+        <div class="nav__section">LEARN & PRACTICE</div>
+        <a class="nav__item" href="learn.html" data-nav="learn">Education & Drills</a>
+
+        <div class="nav__section">SETTINGS</div>
+        <a class="nav__item" href="settings.html" data-nav="settings">Settings</a>
+      </nav>
     </aside>
 
-    <main class="main">
-      <div class="topbar">
-        <div>
-          <div class="h1">Education Hub</div>
-          <div class="small">Short lessons + practice drills (senior-friendly).</div>
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Education & Drills</h1>
+          <div class="page-subtitle">Learn common scam patterns and practice safely.</div>
         </div>
-        <div class="top-actions">
-          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
-          <button class="iconbtn" onclick="location.href='settings.html'" title="Settings">⚙️</button>
-          <div class="userchip">
-            <div class="avatar">M</div>
-            <div>
-              <div style="font-weight:800;line-height:1">Margaret Smith</div>
-              <div class="small">Senior User</div>
+      </header>
+
+      <main class="content">
+        <section class="grid grid--2">
+          <div class="card">
+            <div class="card__title">Education Hub (Senior-friendly)</div>
+            <div class="card__muted">Short lessons with calm language and large text.</div>
+            <div class="lesson-list">
+              <div class="lesson">
+                <div class="lesson__title">How scammers create urgency</div>
+                <div class="lesson__sub">“Act now”, “final warning”, “limited time”</div>
+                <button class="btn btn--small btn--secondary">Open</button>
+              </div>
+              <div class="lesson">
+                <div class="lesson__title">Impersonation tricks</div>
+                <div class="lesson__sub">Banks, delivery, government, tech support</div>
+                <button class="btn btn--small btn--secondary">Open</button>
+              </div>
+              <div class="lesson">
+                <div class="lesson__title">Safe verification habits</div>
+                <div class="lesson__sub">Use official numbers, never from messages</div>
+                <button class="btn btn--small btn--secondary">Open</button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="grid cards2">
-        <div class="card">
-          <div class="h2">1-Minute Lessons</div>
-          <select id="topic" class="input">
-            <option value="bank">Fake bank / account suspended</option>
-            <option value="package">Fake delivery / USPS</option>
-            <option value="family">Impersonating family member</option>
-            <option value="remote">Remote support scam</option>
-            <option value="invest">Investment scam</option>
-          </select>
+          <div class="card">
+            <div class="card__title">Gamified Scam Drills</div>
+            <div class="card__muted">Practice spotting scams — no real risk.</div>
+            <div class="drill">
+              <div class="drill__score">
+                <div class="stat">
+                  <div class="stat__num">4</div>
+                  <div class="stat__label">Streak</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__num">82%</div>
+                  <div class="stat__label">Accuracy</div>
+                </div>
+              </div>
+              <div class="callout callout--warn">
+                <strong>Drill prompt:</strong> “Your package is held. Pay a fee now.”
+              </div>
+              <div class="actions">
+                <button class="btn btn--primary">This is a Scam</button>
+                <button class="btn btn--secondary">Seems Safe</button>
+              </div>
+              <div class="hint">We’ll explain why after you choose.</div>
+            </div>
+          </div>
+        </section>
 
-          <div class="btnrow">
-            <button class="btn gray" id="tts">🔊 Read aloud</button>
-            <button class="btn secondary" onclick="location.href='scan.html'">Try scanning</button>
+        <section class="panel">
+          <div class="panel__head">
+            <div>
+              <div class="panel__title">Scam Library</div>
+              <div class="panel__sub">Browse common scam types and warning signs.</div>
+            </div>
           </div>
 
-          <div class="hr"></div>
-          <div style="font-weight:900;font-size:18px" id="title"></div>
-          <div class="note" id="content" style="margin-top:8px;"></div>
-          <ul class="note" id="signals" style="margin-top:10px;padding-left:18px;"></ul>
-          <ul class="note" id="steps" style="margin-top:10px;padding-left:18px;"></ul>
-        </div>
-
-        <div class="card">
-          <div class="h2">Scam Simulation Drills (P2)</div>
-          <div class="small">Answer one question to practice safer behavior.</div>
-          <div class="hr"></div>
-
-          <div class="note" id="drillQ" style="font-weight:900"></div>
-          <div class="btnrow" id="drillBtns"></div>
-          <div class="note" id="drillAns" style="margin-top:10px;"></div>
-
-          <div class="hr"></div>
-          <div class="h2">Quick rules</div>
-          <ul class="note" style="padding-left:18px;">
-            <li>Never share verification codes.</li>
-            <li>Never transfer money under pressure.</li>
-            <li>Verify using official contact info you find yourself.</li>
-            <li>If unsure, ask a trusted contact.</li>
-          </ul>
-        </div>
-      </div>
-
-      <script>
-        const lessons = {
-          bank: {
-            title:"Fake bank alert",
-            content:"Scammers claim your account is frozen and push you to click a link or give a code.",
-            signals:["Urgency + fear (frozen/suspended)","Asks for codes/password","Unknown link/domain"],
-            steps:["Stop immediately","Call bank via official number","Ask family before any action"]
-          },
-          package: {
-            title:"Fake delivery message",
-            content:"Scammers send a link to 'reschedule delivery' or pay a small fee.",
-            signals:["Unknown short link","Requests payment/card","Odd domain/spelling"],
-            steps:["Don’t click the link","Check official USPS/UPS site","Ask family if unsure"]
-          },
-          family: {
-            title:"Impersonating family",
-            content:"Scammer pretends to be your child and asks for money quickly.",
-            signals:["New number","Urgent money request","Avoids video/voice"],
-            steps:["Call known number","Do not send money","Ask a second family member"]
-          },
-          remote: {
-            title:"Remote support scam",
-            content:"They ask you to install AnyDesk/TeamViewer to 'fix' a problem.",
-            signals:["Remote app request","Threatens consequences","Requests payment"],
-            steps:["Do not install anything","Hang up","Contact official support yourself"]
-          },
-          invest: {
-            title:"Investment scam",
-            content:"High returns, low risk, and pressure to deposit quickly.",
-            signals:["Guaranteed returns","Pressure to act now","Asks to move money to new accounts"],
-            steps:["Assume scam until proven otherwise","Verify via regulated sources","Ask family + do not transfer"]
-          }
-        };
-
-        const topic = document.getElementById("topic");
-        const title = document.getElementById("title");
-        const content = document.getElementById("content");
-        const signals = document.getElementById("signals");
-        const steps = document.getElementById("steps");
-        const tts = document.getElementById("tts");
-
-        function renderLesson(){
-          const L = lessons[topic.value];
-          title.textContent = L.title;
-          content.textContent = L.content;
-          signals.innerHTML = L.signals.map(x=>`<li><strong>Red flag:</strong> ${x}</li>`).join("");
-          steps.innerHTML = L.steps.map(x=>`<li><strong>Do:</strong> ${x}</li>`).join("");
-        }
-        renderLesson();
-        topic.addEventListener("change", renderLesson);
-
-        tts.addEventListener("click", ()=>{
-          const L = lessons[topic.value];
-          const text = `${L.title}. ${L.content}. Red flags: ${L.signals.join(", ")}. What to do: ${L.steps.join(", ")}.`;
-          speak(text);
-        });
-
-        // Drills
-        const drills = [
-          {
-            q:"A message says: “Your account is suspended. Click now.” What should you do?",
-            choices:["Click immediately", "Pause and verify via official channels", "Share verification code to unlock"],
-            correct:1,
-            explain:"Pause first. Use official contact info you find yourself. Never share codes."
-          },
-          {
-            q:"Someone asks you to buy gift cards to pay a fee. Best response?",
-            choices:["Buy the gift cards", "Ask family first and do not pay", "Send bank password to confirm"],
-            correct:1,
-            explain:"Gift cards are a common scam method. Do not pay; confirm with family."
-          }
-        ];
-        let cur = 0;
-        const drillQ = document.getElementById("drillQ");
-        const drillBtns = document.getElementById("drillBtns");
-        const drillAns = document.getElementById("drillAns");
-
-        function renderDrill(){
-          const d = drills[cur];
-          drillQ.textContent = d.q;
-          drillBtns.innerHTML = d.choices.map((c,i)=>`<button class="btn gray" data-i="${i}">${c}</button>`).join("");
-          drillAns.textContent = "";
-          drillBtns.querySelectorAll("button").forEach(b=>{
-            b.addEventListener("click", ()=>{
-              const i = Number(b.dataset.i);
-              const ok = i === d.correct;
-              drillAns.textContent = ok ? `✅ Correct. ${d.explain}` : `❌ Not safe. ${d.explain}`;
-              cur = (cur + 1) % drills.length;
-            });
-          });
-        }
-        renderDrill();
-      </script>
-    </main>
+          <div class="grid grid--3">
+            <div class="card card--flat">
+              <div class="card__title">Tech Support Scam</div>
+              <div class="card__muted">Asks to install software or share screen.</div>
+              <a class="btn btn--ghost btn--full" href="tools.html#toolkit">Save evidence steps</a>
+            </div>
+            <div class="card card--flat">
+              <div class="card__title">Bank Impersonation</div>
+              <div class="card__muted">Urgent account warnings + links.</div>
+              <a class="btn btn--ghost btn--full" href="tools.html#number">Verify number</a>
+            </div>
+            <div class="card card--flat">
+              <div class="card__title">Delivery/Package Scam</div>
+              <div class="card__muted">Small fee requests + fake tracking.</div>
+              <a class="btn btn--ghost btn--full" href="tools.html#linkqr">Check link</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   </div>
+  <script src="js/app.js"></script>
 </body>
 </html>

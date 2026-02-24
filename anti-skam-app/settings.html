@@ -1,182 +1,133 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>SafeGuard – Settings</title>
-  <link rel="stylesheet" href="css/styles.css"/>
-  <script defer src="js/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeGuard — Settings</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body data-page="settings">
   <div class="app">
-
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Primary navigation">
       <div class="brand">
-        <div class="logo">🛡️</div>
-        <div>
-          <div class="brand-title">SafeGuard</div>
-          <div class="brand-sub">Scam Protection</div>
+        <div class="brand__mark" aria-hidden="true">🛡️</div>
+        <div class="brand__text">
+          <div class="brand__name">SafeGuard</div>
+          <div class="brand__tag">Scam Protection Workspace</div>
         </div>
       </div>
 
-      <div class="nav">
-        <a data-nav href="index.html">🏠 Dashboard</a>
-        <a data-nav href="scan.html">🧾 Scan History</a>
-        <a data-nav href="tools.html">🧩 Extension Demo</a>
+      <nav class="nav">
+        <div class="nav__section">WORKSPACE</div>
+        <a class="nav__item" href="index.html" data-nav="dashboard">Dashboard</a>
+        <a class="nav__item" href="scan.html" data-nav="scan">Scans & Inbox</a>
 
-        <div class="nav-section">Safety Tools</div>
-        <a data-nav href="tools.html">🔗 Link & QR Check</a>
-        <a data-nav href="tools.html#number">📞 Number Lookup</a>
-        <a data-nav href="tools.html#toolkit">🧰 Response Toolkit</a>
-        <a data-nav href="settings.html">🧯 Safety Recovery</a>
+        <div class="nav__section">SAFETY TOOLS</div>
+        <a class="nav__item" href="tools.html" data-nav="tools">Tools</a>
 
-        <div class="nav-section">Family & Support</div>
-        <a data-nav href="family.html">👥 Trusted Contacts</a>
-        <a data-nav href="family.html#escort">🧑‍🤝‍🧑 Family Escort</a>
-        <a data-nav href="family.html#emergency">🚨 Emergency Support</a>
+        <div class="nav__section">FAMILY & SUPPORT</div>
+        <a class="nav__item" href="family.html" data-nav="family">Family & Support</a>
 
-        <div class="nav-section">Learn & Practice</div>
-        <a data-nav href="learn.html">📚 Education Hub</a>
-      </div>
+        <div class="nav__section">LEARN & PRACTICE</div>
+        <a class="nav__item" href="learn.html" data-nav="learn">Education & Drills</a>
+
+        <div class="nav__section">SETTINGS</div>
+        <a class="nav__item" href="settings.html" data-nav="settings">Settings</a>
+      </nav>
     </aside>
 
-    <main class="main">
-      <div class="topbar">
-        <div>
-          <div class="h1">Settings</div>
-          <div class="small">Accessibility, whitelist, recovery options.</div>
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Settings</h1>
+          <div class="page-subtitle">Privacy, family controls, whitelist, and health score preferences.</div>
         </div>
-        <div class="top-actions">
-          <button class="iconbtn" onclick="location.href='index.html'" title="Dashboard">🏠</button>
-          <button class="iconbtn" onclick="location.href='scan.html'" title="Scan">🧾</button>
-          <div class="userchip">
-            <div class="avatar">M</div>
-            <div>
-              <div style="font-weight:800;line-height:1">Margaret Smith</div>
-              <div class="small">Senior User</div>
+      </header>
+
+      <main class="content">
+        <section class="grid grid--2">
+          <div class="card">
+            <div class="card__title">Smart Whitelist & Do Not Disturb</div>
+            <div class="card__muted">Allow trusted senders and silence unknown or risky sources.</div>
+            <div class="setting-row">
+              <div>
+                <div class="setting-row__title">Auto-silence unknown numbers</div>
+                <div class="setting-row__sub">Reduces pressure from repeated calls.</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="switch__ui" aria-hidden="true"></span>
+              </label>
+            </div>
+            <div class="setting-row">
+              <div>
+                <div class="setting-row__title">Whitelist trusted contacts</div>
+                <div class="setting-row__sub">Always allow family and approved services.</div>
+              </div>
+              <button class="btn btn--secondary">Manage</button>
+            </div>
+            <div class="hint">You can always review silenced items in Scan History.</div>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Family Support Controls</div>
+            <div class="card__muted">You decide what gets shared and when.</div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-row__title">Require confirmation for Family Alert</div>
+                <div class="setting-row__sub">Prevents accidental alerts.</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="switch__ui" aria-hidden="true"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-row__title">Enable Escort Mode invitations</div>
+                <div class="setting-row__sub">Invite help on high-risk items.</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="switch__ui" aria-hidden="true"></span>
+              </label>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="grid cards2">
-        <div class="card">
-          <div class="h2">Accessibility</div>
-          <div class="toggle">
-            <div>
-              <div style="font-weight:900">Large Text</div>
-              <div class="small">Recommended for older adults.</div>
+        <section class="grid grid--2">
+          <div class="card">
+            <div class="card__title">Digital Health Score</div>
+            <div class="card__muted">A calm summary of your protection level.</div>
+            <div class="health">
+              <div class="health__ring" aria-hidden="true">98%</div>
+              <div class="health__text">
+                <div class="health__title">Excellent</div>
+                <div class="health__sub">Strong habits + safe browsing tools enabled.</div>
+                <button class="btn btn--secondary">View Analytics</button>
+              </div>
             </div>
-            <button class="btn gray" id="toggleText">Toggle</button>
           </div>
 
-          <div class="hr"></div>
-          <div class="h2">Trusted Contact (quick edit)</div>
-          <input id="cName" class="input" placeholder="Name"/>
-          <div style="height:10px"></div>
-          <input id="cPhone" class="input" placeholder="Phone"/>
-          <div class="btnrow">
-            <button class="btn primary" id="saveContact">Save</button>
-            <button class="btn gray" onclick="location.href='family.html'">Open Family Page</button>
+          <div class="card">
+            <div class="card__title">Breach Check (Concept)</div>
+            <div class="card__muted">Identify if personal information may be exposed (prototype).</div>
+            <label class="label">Email</label>
+            <input class="input" placeholder="margaret@example.com" />
+            <div class="actions">
+              <button class="btn btn--primary">Check Breaches</button>
+              <button class="btn btn--ghost">What this means</button>
+            </div>
+            <div class="callout callout--info">
+              If a breach is found, we’ll suggest password changes and account monitoring steps.
+            </div>
           </div>
-          <div class="footer" id="cLine"></div>
-        </div>
-
-        <div class="card">
-          <div class="h2">Smart Whitelist</div>
-          <div class="small">Whitelist reduces risk for trusted domains/keywords.</div>
-          <div class="hr"></div>
-          <input id="wl" class="input" placeholder="bank, usps, amazon"/>
-          <div class="btnrow">
-            <button class="btn primary" id="saveWL">Save</button>
-            <button class="btn gray" id="resetWL">Reset</button>
-          </div>
-          <div class="footer" id="wlLine"></div>
-
-          <div class="hr"></div>
-          <div class="h2">Safety Recovery</div>
-          <div class="note">
-            This prototype stores data locally. If something looks wrong, you can clear scan history.
-          </div>
-          <div class="btnrow">
-            <button class="btn danger" id="clearHistory">Clear Scan History</button>
-            <button class="btn gray" id="resetAll">Reset All Settings</button>
-          </div>
-        </div>
-      </div>
-
-      <script>
-        const toggleText = document.getElementById("toggleText");
-        const cName = document.getElementById("cName");
-        const cPhone = document.getElementById("cPhone");
-        const saveContact = document.getElementById("saveContact");
-        const cLine = document.getElementById("cLine");
-
-        const wl = document.getElementById("wl");
-        const saveWL = document.getElementById("saveWL");
-        const resetWL = document.getElementById("resetWL");
-        const wlLine = document.getElementById("wlLine");
-
-        const clearHistory = document.getElementById("clearHistory");
-        const resetAll = document.getElementById("resetAll");
-
-        function load(){
-          const s = store.get("settings", DEFAULTS);
-          const c = s.emergencyContacts?.[0] || {name:"", phone:""};
-          cName.value = c.name || "";
-          cPhone.value = c.phone || "";
-          wl.value = (s.whitelist || []).join(", ");
-          cLine.textContent = c.phone ? `Saved: ${c.name} (${c.phone})` : "No contact saved.";
-          wlLine.textContent = `Whitelist: ${(s.whitelist||[]).join(", ")}`;
-          applySettings();
-        }
-        load();
-
-        toggleText.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          s.largeText = !s.largeText;
-          store.set("settings", s);
-          load();
-          alert(`Large Text: ${s.largeText ? "ON" : "OFF"}`);
-        });
-
-        saveContact.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          s.emergencyContacts = [{name: cName.value.trim() || "Family", phone: cPhone.value.trim()}];
-          store.set("settings", s);
-          load();
-          alert("Saved!");
-        });
-
-        saveWL.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          s.whitelist = wl.value.split(",").map(x=>x.trim()).filter(Boolean);
-          store.set("settings", s);
-          load();
-          alert("Saved!");
-        });
-
-        resetWL.addEventListener("click", ()=>{
-          const s = store.get("settings", DEFAULTS);
-          s.whitelist = DEFAULTS.whitelist.slice();
-          store.set("settings", s);
-          load();
-          alert("Whitelist reset!");
-        });
-
-        clearHistory.addEventListener("click", ()=>{
-          store.set("scanHistory", []);
-          alert("Scan history cleared.");
-        });
-
-        resetAll.addEventListener("click", ()=>{
-          store.set("settings", DEFAULTS);
-          store.set("scanHistory", []);
-          load();
-          alert("All settings reset.");
-        });
-      </script>
-    </main>
+        </section>
+      </main>
+    </div>
   </div>
+  <script src="js/app.js"></script>
 </body>
 </html>
